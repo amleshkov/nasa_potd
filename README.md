@@ -50,8 +50,11 @@ all outgoing traffic through a proxy, use the standard environment variables
 | `YC_API_TOKEN` | Yandex Cloud Translate API key                   |
 | `NASA_API_KEY` | NASA API key, defaults to `DEMO_KEY`; sign up at [api.nasa.gov](https://api.nasa.gov) for your own key and higher rate limits |
 
-Locally the values are read from `.env` (python-dotenv); on the server they
-come from `bot-env.sh` via `EnvironmentFile=` in the systemd unit.
+Locally the values are read from `.env` (python-dotenv). On the server they
+come from `bot-env.sh` via `EnvironmentFile=` in the systemd unit, except
+`NASA_API_KEY`, which is configured only in `.env` — to set it on the server,
+create `/opt/bot/nasa_potd/.env`. If `NASA_API_KEY` is not set, the bot falls
+back to `DEMO_KEY`.
 
 ## Local run
 
