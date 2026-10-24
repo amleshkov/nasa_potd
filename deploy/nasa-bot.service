@@ -1,0 +1,14 @@
+[Unit]
+Description=NASA picture of the day telegram bot
+Wants=nasa-bot.timer
+
+[Service]
+EnvironmentFile=/opt/bot/nasa_potd/bot-env.sh
+User=bot
+Group=bot
+Type=oneshot
+WorkingDirectory=/opt/bot/nasa_potd
+ExecStart=/opt/bot/nasa_potd/bin/python -m nasa_potd
+
+[Install]
+WantedBy=multi-user.target

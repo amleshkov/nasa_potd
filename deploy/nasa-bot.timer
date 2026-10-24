@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for NASA POTD Telegram bot
+Requires=nasa-bot.service
+
+[Timer]
+Unit=nasa-bot.service
+OnCalendar=*-*-* 12:00:00
+
+[Install]
+WantedBy=timers.target
