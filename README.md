@@ -43,11 +43,12 @@ all outgoing traffic through a proxy, use the standard environment variables
 
 ## Environment variables
 
-| Variable       | Purpose                          |
-|----------------|----------------------------------|
-| `BOT_TOKEN`    | Telegram bot token               |
-| `CHAT_ID`      | ID of the channel to publish to  |
-| `YC_API_TOKEN` | Yandex Cloud Translate API key   |
+| Variable       | Purpose                                          |
+|----------------|--------------------------------------------------|
+| `BOT_TOKEN`    | Telegram bot token                               |
+| `CHAT_ID`      | ID of the channel to publish to                  |
+| `YC_API_TOKEN` | Yandex Cloud Translate API key                   |
+| `NASA_API_KEY` | NASA API key, defaults to `DEMO_KEY`; sign up at [api.nasa.gov](https://api.nasa.gov) for your own key and higher rate limits |
 
 Locally the values are read from `.env` (python-dotenv); on the server they
 come from `bot-env.sh` via `EnvironmentFile=` in the systemd unit.

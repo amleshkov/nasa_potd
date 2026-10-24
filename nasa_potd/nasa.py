@@ -1,4 +1,5 @@
 import html
+import os
 import re
 
 import requests
@@ -6,6 +7,7 @@ import requests
 from . import config
 
 NASA_API_URL = 'https://science.nasa.gov/wp-json/wp/v2/apod-basic'
+NASA_API_KEY_DEFAULT = 'DEMO_KEY'
 
 
 class NasaData:
@@ -13,7 +15,10 @@ class NasaData:
     def __init__(self):
         response = requests.get(
             NASA_API_URL,
-            params={'per_page': 1},
+            params={
+                'per_page': 1,
+                'api_key': os.getenv('NASA_API_KEY', NASA_API_KEY_DEFAULT),
+            },
             proxies={'http': config.proxy, 'https': config.proxy} if config.proxy else None,
             timeout=60,
         )

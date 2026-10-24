@@ -1,8 +1,27 @@
+import os
 import unittest
 from unittest import mock
 
 from nasa_potd import config
 from nasa_potd.nasa import NasaData
+
+
+class ApiKeyTest(unittest.TestCase):
+
+    @mock.patch('nasa_potd.nasa.requests.get')
+    def test_key_from_env(self, get):
+        get.return_value.json.return_value = [{'title': 'title'}]
+        with mock.patch.dict('os.environ', {'NASA_API_KEY': 'MY_KEY'}):
+            NasaData()
+        self.assertEqual(get.call_args.kwargs['params']['api_key'], 'MY_KEY')
+
+    @mock.patch('nasa_potd.nasa.requests.get')
+    def test_key_defaults_to_demo(self, get):
+        get.return_value.json.return_value = [{'title': 'title'}]
+        env = {k: v for k, v in os.environ.items() if k != 'NASA_API_KEY'}
+        with mock.patch.dict('os.environ', env, clear=True):
+            NasaData()
+        self.assertEqual(get.call_args.kwargs['params']['api_key'], 'DEMO_KEY')
 
 
 class ProxyConfigTest(unittest.TestCase):
