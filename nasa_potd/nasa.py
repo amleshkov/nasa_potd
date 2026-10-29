@@ -33,7 +33,7 @@ class NasaData:
 
     def url(self):
         if self.apod.get('media_type') == 'image':
-            return self.apod.get('hdurl') or self.apod['url']
+            return self.apod.get('hdurl').spit('?')[0] or self.apod['url']
         return self.apod['url']
 
     @staticmethod
